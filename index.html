@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>PresideCon 2018: Customising the Data Manager</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="shower/themes/ribbon-mod/styles/screen-4x3.css">
+	<link rel="stylesheet" href="shower/themes/ribbon-mod/styles/mod.css">
+</head>
+<body class="shower full">
+
+	<header class="caption">
+		<h1>Customising the Data Manager</h1>
+		<p>Seb Duggan, PresideCon 2018</p>
+	</header>
+
+	<section class="slide">
+		<img src="img/puffin.jpg" class="cover">
+
+		<h2 class="place" style="white-space: nowrap;">Customising the Data Manager</h2>
+		<h3 class="place" style="margin-top:2.5em;"><em>Seb Duggan</em></h3>
+	</section>
+
+	<section class="slide">
+		<h2>Data Manager basics</h2>
+
+		<ul>
+			<li>Add <code>@dataManagerGroup groupname</code> to object definition
+			<li class="next">Object will be listed in the Data Manager</li>
+			<li class="next">Basic interface to managing your data: listing, add, edit, delete</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Data Manager basics</h2>
+
+		<img src="img/basic-objects.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Data Manager basics</h2>
+
+		<img src="img/basic-listing.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Data Manager basics</h2>
+
+		<img src="img/basic-edit.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Simple customisations</h2>
+
+		<ul>
+			<li>Apply annotations to object definition:
+				<ul>
+					<li class="next"><code>@dataManagerGridFields</code></li>
+					<li class="next"><code>@dataManagerSearchFields</code></li>
+					<li class="next"><code>@dataManagerDefaultSortOrder</code></li>
+					<li class="next"><code>@dataManagerAllowedOperations</code></li>
+					<li class="next"><code>@dataManagerDisallowedOperations</code></li>
+				</ul>
+			</li>
+			<li class="next">Form customisation - Jan Jannek’s talk this afternoon</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Simple customisations</h2>
+
+		<div>
+			<pre>
+				<code>/**</code>
+				<code class="next"> * @dataManagerGroup                Projects</code>
+				<code class="next"> * @dataManagerGridFields           label,date,regions_list</code>
+				<code class="next"> * @dataManagerSearchFields         label,date,regions</code>
+				<code class="next"> * @dataManagerDefaultSortOrder     date desc</code>
+				<code class="next"> * @dataManagerDisallowedOperations delete</code>
+				<code> */</code>
+				<code>component { ... }</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>A custom admin interface</h2>
+
+		<ul>
+			<li>What if you want to:
+				<ul>
+					<li class="next">Move it outside the Data Manager screen</li>
+					<li class="next">Define content on the listing or view page</li>
+					<li class="next">Set up custom permissioning</li>
+					<li class="next">Add extra data processing actions</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Old solution: crudadmin</h2>
+
+		<ul>
+			<li>devtools command: <code>&gt; new crudadmin</code>
+				<ul>
+					<li class="next">Generate custom admin boilerplate for an object</li>
+					<li class="next">Numerous files being created just for basic functionality</li>
+					<li class="next">Much duplication of code</li>
+					<li class="next">Didn’t benefit from all features of Data Manager</li>
+					<li class="next">Miss out on Preside improvements</li>
+					<li class="next">Either/or approach with this and Data Manager</li>
+					<li class="next">Officially retired in Preside 10.9</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>New &amp; improved Data Manager</h2>
+
+		<ul>
+			<li>Introduced in Preside 10.9</li>
+			<li class="next">Individual record view screen</li>
+			<li class="next">Customise object admin by convention
+				<ul>
+					<li class="next"><code>/handlers/admin/datamanager/{objectName}.cfc</code></li>
+				</ul>
+			</li>
+			<li class="next">Many customisation points (well-documented!)</li>
+			<li class="next">Minimises duplication of code</li>
+			<li class="next">All the benefits of the Data Manager interface</li>
+			<li class="next">Allows object admin to be first-class citizen of the admin</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Record view screen</h2>
+
+		<ul>
+			<li>New screen to show data in a read-only format</li>
+			<li class="next">Relationships show as links, or as a record browser</li>
+			<li class="next">Default view is functional, but will often benefit from customising</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Record view screen</h2>
+
+		<img src="img/view-record.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Customisations</h2>
+
+		<ul>
+			<li>Add extra content to various positions in the view</li>
+			<li class="next">Completely replace a view</li>
+			<li class="next">Add buttons, actions and pages</li>
+			<li class="next">Pre/post hooks for data operations</li>
+			<li class="next">Custom breadcrumbs</li>
+			<li class="next">Complex custom permissioning</li>
+			<li class="next">Write your own customisations</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/sage-warehouse.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/sage-orders.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/sage-calendar.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/sage-inventory.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/mis-client.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2>Real-world customisations</h2>
+
+		<img src="img/crm.png" width="650">
+	</section>
+
+	<section class="slide">
+		<h2 class="place" style="white-space: nowrap;">Live demo</h2>
+	</section>
+
+
+
+	<section class="slide">
+		<h2>Some final observations</h2>
+
+		<ul>
+			<li>Customisations only apply when using the Data Manager: use interceptors as well</li>
+			<li class="next">There are more customisations I haven’t covered</li>
+			<li class="next">The docs describe all the customisations in great detail</li>
+			<li class="next">Get out there and start experimenting!</li>
+		</ul>
+	</section>
+
+
+	<section class="slide">
+		<h2>Any questions?</h2>
+
+		<ul>
+			<li>Docs: <a>https://docs.preside.org/devguides/datamanager.html</a></li>
+		</ul>
+	</section>
+
+	<script src="shower/shower.min.js"></script>
+
+</body>
+</html>
